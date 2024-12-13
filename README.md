@@ -2,27 +2,7 @@
 
 https://starlinkstatus.space/
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/C0C67UDEB)
-
-The current version of the .sh Script is 1.3 — please update if still us an older version.
-
-## Upgrade to Version 1.3
-When upgrading from version 1.2x to 1.3 you need to change your cron to only start the script on reboot.
-Also make sure that you got gnu parallel installed, it can be installed on msot distros via apt.
-
-`sudo apt install parallel`
-
-After Upgrading please restart your compute to activate the script with the new cron.
-
-`@reboot ~/path/to/starlinkstatus_client.sh -k 'YOURAPIKEY' -s -d`
-
-If you used a different speedtest interval before, you now need to set it with the -i flag in seconds. 
-
-`@reboot ~/path/to/starlinkstatus_client.sh -k 'YOURAPIKEY' -s -d -i 300`
-
-## WARNING
-This will use quite a lot of traffic! If you are NOT on a unlimited plan you should increase the interval of the speedtests.
-Each test can use up to ~500Mb of Data, so a test every 15min could use up to 48gb/Day!
+Original project and conecept by [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/C0C67UDEB)
 
 ### About
 
@@ -30,8 +10,15 @@ Starlinkstatus.space is a website that offers statistics from Starlink users wor
 
 ## How to Contribute Data
 
-To contribute data you need a computer (Linux, Mac, or Windows) that is connected to your Starlink network (at best with access to Dishy).
-A good setup is a Raspberry PI 3B+ or newer with a wired connection; this tutorial is based on a fresh installation of one.
+You can contribute data to https://starlinkstatus.space/ by registering for a free api key and running the script in this repository on a Linux device.
+For best performance, ensure that the contributing device has an ethernet connection directly to the Dish's router. 
+
+
+## WARNINGS AND CONSIDERATIONS 
+This will use quite a lot of traffic! If you are NOT on a unlimited plan you should increase the interval of the speedtests.
+Each test can use up to ~500Mb of Data, so a test every 15min could use up to 48gb/Day!
+
+
  
 Windows Users should use the Automatic Installer by @tevslin:
 https://github.com/Tysonpower/starlinkstatus/blob/main/windowsinstall/NativeWindowsREADME.md
@@ -107,9 +94,3 @@ chmod +x starlinkstatus_client.sh
 crontab -e
 @reboot ~/path/to/starlinkstatus_client.sh -k 'YOURAPIKEY' -s -d -i 28800
 ```
-## Windows (not recommended)
-To run the script every 15 minutes in WSL on Windows, open the "task scheduler" and create a new task.
-- Add a trigger on system start, repeat every 15 minutes for an unlimited time
-- Add a action to start a program, enter the path to wsl.exe (`C:\Windows\System32\wsl.exe`) and add the argument `~/path/to/starlinkstatus_client.sh -k 'YOURAPIKEY' -s -d`
-
-Save the task—you can test it by selecting it and clicking the "run task" button to the right of the task scheduler.
